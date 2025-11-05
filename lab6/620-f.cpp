@@ -21,23 +21,30 @@ int convertToNumber(string s) {
 }
 
 string convertToStr(int n) {
+  string result = "";
   map<int, string> nums = { 
-    {1, "ONE"}, {"TWO", 2}, {"THR", 3}, {"FOU", 4}, {"FIV", 5}, {"SIX", 6}, {"SEV", 7}, {"EIG", 8}, {"NIN", 9}, {"ZER", 0}
+    {1, "ONE"}, {2, "TWO"}, {3, "THR"}, {4, "FOU"}, {5, "FIV"}, {6, "SIX"}, {7, "SEV"}, {8, "EIG"}, {9, "NIN"}, {0, "ZER"}
   }; 
 
   while(n > 0) {
     int digit = n % 10;
+    n /= 10;
+    result = nums[digit] + result;
   }
+
+  return result;
 }
 
 int main() {
-  string s = "ONETWOTHR+FOUFIVSIX";
+  string s = "ONETWO+FOUFIVSIX";
 
   int plusIndex = s.find('+');
   string firstPart = s.substr(0, plusIndex);
   string secondPart = s.substr(plusIndex + 1);
 
-  cout << convertToNumber(firstPart) + convertToNumber(secondPart);
+  int sum = convertToNumber(firstPart) + convertToNumber(secondPart);
+
+  cout << convertToStr(sum);
 
   return 0;
 }
